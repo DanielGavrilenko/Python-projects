@@ -29,9 +29,9 @@ scissors = '''
 
 game_images = [rock, paper, scissors]
 user = int(input("What do you choose? Type 0 for Rock, 1 for Paper or 2 for Scissors.\n"))
-print("Computer chose:")
 print(game_images[user])
 
+print("Computer chose:")
 comp = random.randint(0, 2)
 print(game_images[comp])
 
