@@ -1,5 +1,7 @@
 import random
 
+from art import logo
+
 EASY_ATTEMPTS = 10
 HARD_ATTEMPTS = 5
 attempts = 0
@@ -42,6 +44,7 @@ def comparing_number():
         game_end = 1
 
 
+print(logo)
 print("welcome to the Number Guessing Game!")
 while play_game == "yes":
     print("I'm thinking of a number between 1 and 100.")
