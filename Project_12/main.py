@@ -16,8 +16,6 @@ def guess_number():
 
 
 def level_selection():
-    global EASY_ATTEMPTS
-    global HARD_ATTEMPTS
     global attempts
     difficulty = input("Choose a difficulty. Type 'easy' or 'hard':")
     while attempts == 0:
