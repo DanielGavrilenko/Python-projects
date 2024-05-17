@@ -1,16 +1,88 @@
-# This is a sample Python script.
+MENU = {
+    "espresso": {
+        "ingredients": {
+            "water": 50,
+            "coffee": 18,
+        },
+        "cost": 1.5,
+    },
+    "latte": {
+        "ingredients": {
+            "water": 200,
+            "milk": 150,
+            "coffee": 24,
+        },
+        "cost": 2.5,
+    },
+    "cappuccino": {
+        "ingredients": {
+            "water": 250,
+            "milk": 100,
+            "coffee": 24,
+        },
+        "cost": 3.0,
+    }
+}
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+resources = {
+    "water": 300,
+    "milk": 200,
+    "coffee": 100,
+    "profit": 0
+}
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def do_report():
+    print(f"Water: {resources['water']}ml")
+    print(f"Milk: {resources['milk']}ml")
+    print(f"Coffee: {resources['coffee']}g")
+    print(f"Money: ${resources['profit']}")
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def transaction(drink):
+    coin01 = int(input("How many 0.01 coins do you want to pay?"))
+    coin05 = int(input("How many 0.05 coins do you want to pay?"))
+    coin10 = int(input("How many 0.10 coins do you want to pay?"))
+    coin25 = int(input("How many 0.25 coins do you want to pay?"))
+    sum: float = coin25 * 0.25 + coin10 * 0.1 + coin05 * 0.05 + coin01 * 0.01
+    if sum >= MENU[drink]["cost"]:
+        return sum
+    else:
+        return 0.0
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+def is_enough_ingredients(drink):
+    if resources["water"] < MENU[drink]['ingredients']['water']:
+        print("Not enough water")
+        return 0
+    elif resources["milk"] < MENU[drink]['ingredients']['milk']:
+        print("Not enough milk")
+        return 0
+    elif resources["coffee"] < MENU[drink]['ingredients']['coffee']:
+        print("Not enough coffee")
+        return 0
+    else:
+        return 1
+
+
+def do_coffee(drink, sum):
+    resources['profit'] += sum
+    resources['water'] -= MENU[drink]['ingredients']['water']
+    resources['milk'] -= MENU[drink]['ingredients']['milk']
+    resources['coffee'] -= MENU[drink]['ingredients']['coffee']
+
+
+is_on = 1
+while is_on:
+    choice = input("​What would you like? (espresso/latte/cappuccino): ")
+    if choice == "off":
+        is_on = 0
+    elif choice == "report":
+        do_report()
+    else:
+        if is_enough_ingredients(choice):
+            result = transaction(choice)
+            if result == 0.0:
+                print("Invalid payment")
+            else:
+                do_coffee(choice, result)
