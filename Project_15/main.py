@@ -52,17 +52,11 @@ def transaction(drink):
 
 
 def is_enough_ingredients(drink):
-    if resources["water"] < MENU[drink]['ingredients']['water']:
-        print("Not enough water")
-        return 0
-    elif resources["milk"] < MENU[drink]['ingredients']['milk']:
-        print("Not enough milk")
-        return 0
-    elif resources["coffee"] < MENU[drink]['ingredients']['coffee']:
-        print("Not enough coffee")
-        return 0
-    else:
-        return 1
+    for i in MENU[drink]['ingredients']:
+        if resources[i] < MENU[drink]['ingredients'][i]:
+            print(f"Sorry, not enough {i}")
+            return 0
+    return 1
 
 
 def do_coffee(drink, sum):
