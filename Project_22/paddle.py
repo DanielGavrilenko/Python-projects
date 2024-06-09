@@ -1,20 +1,21 @@
 from turtle import Turtle
-
+HEIGHT = 600
 
 class Paddle(Turtle):
-    
-    def __init__(self, position):
+    def __init__(self, x):
         super().__init__()
-        self.shape("square")
         self.color("white")
+        self.shape("square")
         self.shapesize(stretch_wid=5, stretch_len=1)
         self.penup()
-        self.goto(position)
+        self.goto(x, 0)
 
-    def go_up(self):
-        new_y = self.ycor() + 20
-        self.goto(self.xcor(), new_y)
+    def up(self):
+        position = self.position()
+        if position[1] + 20 + 50 < HEIGHT/2:
+            self.goto(position[0], position[1]+20)
 
-    def go_down(self):
-        new_y = self.ycor() - 20
-        self.goto(self.xcor(), new_y)
+    def down(self):
+        position = self.position()
+        if position[1] - 20 - 50 > -HEIGHT / 2:
+            self.goto(position[0], position[1]-20)
